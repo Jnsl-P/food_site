@@ -5,18 +5,15 @@
 }
 
 body {
-  background: url(../media/close-up-white-marble-textured-wall.jpg) no-repeat
+  background: url(../media/wallpaper2.png) no-repeat
     center center fixed;
   background-size: cover;
 }
 
-.navigation {
-  /* position: absolute; */
-  width: 100%;
-}
+
 
 .logo {
-  height: 5rem;
+  height: 80px;
 }
 
 .nav-item {
@@ -26,9 +23,9 @@ body {
 }
 
 .nav-link {
-  color: black !important;
-  font-size: 1.1rem;
-  font-weight: 500;
+  color: white !important;
+  font-size: 1.1rem !important;
+  font-weight: 500 !important;
 }
 
 .nav-link:hover {
@@ -48,7 +45,7 @@ body {
   border-radius: 30px;
   width: 70vw;
   max-width: 1000px;
-  background-color: rgba(245, 245, 245, 0.7) 
+  background-color: rgba(245, 245, 245, 0.9) 
 }
 
 .info h1 {
@@ -163,13 +160,8 @@ body {
     margin: 0 auto;
     display: block;
   }
-  .nav .nav-link{
-    font-size: 1rem;
-  }
-  .logo{
-    height: 10vh;
-    width: auto;
-  }
+ 
+
   .learn_more a{
     font-size: 1rem;
   }
@@ -203,13 +195,8 @@ body {
     font-size: 1.6rem;
     text-align: center;
   }
-  .nav .nav-link{
-    font-size: .8rem;
-  }
-  .logo{
-    height: 8vh;
-    width: auto;
-  }
+  
+  
   .learn_more a{
     font-size: 1rem;
   }
@@ -251,13 +238,8 @@ body {
   .ingredients{
     font-size: 40px;
   }
-  .nav .nav-link{
-    font-size: 2.5rem;
-  }
-  .logo{
-    height: 10vh;
-    width: auto;
-  }
+  
+  
   .learn_more a{
     font-size: 2rem;
   }

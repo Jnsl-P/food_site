@@ -5,13 +5,14 @@
 }
 
 body {
-  background: url(../media/close-up-white-marble-textured-wall.jpg) no-repeat
+  background: url(../media/wallpaper2.png) no-repeat
     center center fixed;
   -webkit-background-size: cover;
   -moz-background-size: cover;
   -o-background-size: cover;
   background-size: cover;
   overflow-x: hidden;
+  color: white;
 }
 
 .navigation {
@@ -38,7 +39,7 @@ body {
   /* height: 15rem; */
   border-radius: 15px;
   padding: 0;
-  box-shadow: 5px 5px 10px #9b9b9b;
+  box-shadow: 5px 5px 10px #1d1d1d;
   transition: 0.5s;
   border: none;
 }
@@ -51,7 +52,7 @@ body {
   margin-bottom: 2%;
   padding: 0 10rem;
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(18rem, 1fr));
+  grid-template-columns: repeat(auto-fit, minmax(18rem, 18rem));
   grid-gap: 1.4rem;
 }
 
@@ -72,9 +73,11 @@ body {
   width: 100%;
 }
 
-.search_section {
-  max-width: 1000px;
+.search_homepage{
+  font-size: 100px;
 }
+
+
 
 .search_icon {
   background-color: black;
@@ -83,7 +86,7 @@ body {
   border-bottom-right-radius: 600px;
 }
 .logo {
-  height: 5em;
+  height: 80px;
 }
 
 .nav-item {
@@ -93,7 +96,7 @@ body {
 }
 
 .nav-link {
-  color: black;
+  color: white;
   font-weight: 500;
   font-size: 1.1rem;
 }

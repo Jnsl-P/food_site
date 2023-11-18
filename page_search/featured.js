@@ -33,8 +33,9 @@ var create_card = (foodNum, Foodname, img_src, cal) => {
   // Create the link element
   var link = document.createElement("a");
   // link.href = "../page_food_info/index.html";
-  link.classList.add("btn", "btn-primary", "btn-foodInfo");
-  link.textContent = "Go somewhere";
+  link.style.backgroundColor = "#FDAB00"
+  link.classList.add("btn", "btn-foodInfo");
+  link.textContent = "View";
   link.onclick = foodInfo;
 
   // Append elements to build the structure
