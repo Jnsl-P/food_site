@@ -8,11 +8,16 @@ var source = document.getElementById("learn_more")
 var food_image = document.getElementById("food_image");
 
 var ingredients_data = JSON.parse(localStorage.getItem("ingredients"))
+// var healthLabels_data = JSON.parse(localStorage.getItem("healthLabels"))
 
 
+// function addlabels(labels) {
+//     var li = document.createElement("li")
+//     li.classList.add("col-3","p-1")
+//     li.innerText = labels
 
-
-
+//     return li
+// }
 function addIngredients(labelText,id) {
     var li = document.createElement('li');
     
@@ -39,9 +44,13 @@ cuisine.innerText = localStorage.getItem("cuisine")
 carbs.innerText = localStorage.getItem("carbs")
 dish.innerText = localStorage.getItem("dish")
 
+
+
 ingredients_data.map((e,i) =>{
     ingredients.appendChild(addIngredients(e,"item"+i))
 })
+
+
 
 source.href = localStorage.getItem("source")
 

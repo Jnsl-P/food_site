@@ -1,4 +1,4 @@
-var create_card = (foodNum, Foodname, img_src, cal) => {
+var create_card = (foodNum, Foodname, img_src, cal, servings) => {
   // Create the main card element
   var card = document.createElement("div");
   card.classList.add("card");
@@ -23,8 +23,29 @@ var create_card = (foodNum, Foodname, img_src, cal) => {
 
   // Create the paragraph element for calories
   var calories = document.createElement("p");
-  calories.classList.add("card-text", "m-0");
+  calories.classList.add("card-text", "m-0", "p-0", "col-5");
   calories.textContent = "Calories: " + cal;
+
+  //servings
+  var serve = document.createElement("p");
+  serve.classList.add("card-text", "m-0", "p-0", "col-5");
+  serve.textContent = " Servings: " + servings;
+
+  var divider = document.createElement("div");
+  divider.classList.add("card-text", "m-0", "p-0", "col-1");
+  divider.innerText = "|";
+
+  var cal_serve = document.createElement("div");
+  cal_serve.classList.add(
+    "row",
+    "cal_serve",
+    "justify-content-center",
+    "align-items-center"
+  );
+
+  cal_serve.appendChild(calories);
+  cal_serve.appendChild(divider);
+  cal_serve.appendChild(serve);
 
   // Create the second horizontal rule
   var hr2 = document.createElement("hr");
@@ -33,7 +54,7 @@ var create_card = (foodNum, Foodname, img_src, cal) => {
   // Create the link element
   var link = document.createElement("a");
   // link.href = "../page_food_info/index.html";
-  link.style.backgroundColor = "#FDAB00"
+  link.style.backgroundColor = "#FDAB00";
   link.classList.add("btn", "btn-foodInfo");
   link.textContent = "View";
   link.onclick = foodInfo;
@@ -41,7 +62,7 @@ var create_card = (foodNum, Foodname, img_src, cal) => {
   // Append elements to build the structure
   cardBody.appendChild(heading);
   cardBody.appendChild(hr1);
-  cardBody.appendChild(calories);
+  cardBody.appendChild(cal_serve);
   cardBody.appendChild(hr2);
   cardBody.appendChild(link);
 
@@ -90,15 +111,26 @@ function foodInfo() {
   );
 
   let ing = [];
-  "ingredients",
+  
     parsedData["hits"][this.parentNode.parentNode.id]["recipe"][
       "ingredients"
     ].map((e) => {
       ing.push(e["text"]);
     });
 
-  let ingredients = JSON.stringify(ing);
+  let ingredients = JSON.stringify(removeDuplicates(ing));
   localStorage.setItem("ingredients", ingredients);
+
+  // labels
+  // let hlabels = [];
+  // parsedData["hits"][this.parentNode.parentNode.id]["recipe"][
+  //   "healthLabels"
+  // ].map((e) => {
+  //   hlabels.push(e);
+  // });
+
+  // let healthLabels = JSON.stringify(removeDuplicates(hlabels));
+  // localStorage.setItem("healthLabels", healthLabels);
 
   localStorage.setItem(
     "source",
@@ -135,7 +167,8 @@ let default_view = () => {
             i,
             e["recipe"]["label"],
             e["recipe"]["image"],
-            (parseInt(e["recipe"]["calories"]) | 0).toString()
+            parseInt(e["recipe"]["calories"]).toString(),
+            e["recipe"]["yield"]
           )
         );
     });
@@ -150,7 +183,6 @@ input.addEventListener("keypress", function (event) {
     }
   }
 });
-
 
 default_view();
 
@@ -178,10 +210,15 @@ function get_food_data() {
             i,
             e["recipe"]["label"],
             e["recipe"]["image"],
-            (parseInt(e["recipe"]["calories"]) | 0).toString()
+            parseInt(e["recipe"]["calories"]).toString(),
+            e["recipe"]["yield"]
           )
         );
     });
   };
   request.send();
+}
+
+function removeDuplicates(arr) {
+  return Array.from(new Set(arr));
 }

@@ -84,17 +84,23 @@ buttonsArray.map((e) => {
 let search_homepage = document.querySelector(".search_homepage");
 
 search_icon.addEventListener("click", function () {
-  if (search_homepage.value !== "") {
+  if (input.value !== "") {
+    input.style.width = "70%";
+    window.location.href  ="./page_search/featured.html"
     localStorage.setItem("default_search", search_homepage.value);
   }
 });
 
-input.addEventListener("focus", function update() {
+input.addEventListener("click", function update() {
   input.style.transition = "0.3s";
   input.style.width = "70%";
   input.addEventListener('keypress', function(event){
   
   })
+});
+
+input.addEventListener("focusout", function update() {
+  input.style.width = "40%";
 });
 
 input.addEventListener('keypress', function(event) {
@@ -107,7 +113,4 @@ input.addEventListener('keypress', function(event) {
 });
 
 
-input.addEventListener("focusout", function update() {
-  // input.style.transition = "0.3s"
-  input.style.width = "40%";
-});
+

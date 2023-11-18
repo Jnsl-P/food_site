@@ -119,6 +119,7 @@ body {
   transition: background-color 0.3s, color 0.3s, width 0.5s;
   padding: 0px 5px;
   border-left: none;
+  cursor: pointer;
 }
 
 .icon {
@@ -159,7 +160,7 @@ body {
   font-size: 2em;
 
 }
-.search_container a{
+.search_container div{
  font-size: 1rem;
 }
 
