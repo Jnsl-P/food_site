@@ -77,6 +77,7 @@ localStorage.clear();
 
 buttonsArray.map((e) => {
   e.addEventListener("click", function () {
+    window.location.href = ("./page_search/featured.html")
     localStorage.setItem("default_search", e.id);
   });
 });
