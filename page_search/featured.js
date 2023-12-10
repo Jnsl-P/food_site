@@ -1,3 +1,11 @@
+let search = document.getElementById("go_search");
+let input = document.getElementById("input");
+let food_card = document.getElementById("food-card");
+let search_button = document.getElementById("go_search");
+let search_query = localStorage.getItem("default_search");
+let parsedData;
+var request = new XMLHttpRequest();
+
 var create_card = (foodNum, Foodname, img_src, cal, servings) => {
   // Create the main card element
   var card = document.createElement("div");
@@ -72,53 +80,77 @@ var create_card = (foodNum, Foodname, img_src, cal, servings) => {
   return card;
 };
 
-let search = document.getElementById("go_search");
-let input = document.getElementById("input");
-let food_card = document.getElementById("food-card");
-let search_query;
-let search_button = document.getElementById("go_search");
+function get_food_data() {
+  search_query = input.value;
 
-search_query = localStorage.getItem("default_search");
-var parsedData;
+  request.open(
+    "GET",
+    "https://api.edamam.com/api/recipes/v2?type=public&q=" +
+      search_query +
+      "&app_id=858e7994&app_key=599e5094ae743172f128d90d303c2588%09"
+  );
 
-search.addEventListener("click", function () {
-  get_food_data();
-});
+  request.onload = function () {
+    var response = request.response;
+    parsedData = JSON.parse(response);
+
+    // append food card
+    $(".food-card").empty();
+    parsedData["hits"].map((e, i) => {
+      document
+        .querySelector(".food-card")
+        .appendChild(
+          create_card(
+            i,
+            e["recipe"]["label"],
+            e["recipe"]["image"],
+            parseInt(e["recipe"]["calories"]).toString(),
+            e["recipe"]["yield"]
+          )
+        );
+    });
+  };
+  request.send();
+}
 
 function foodInfo() {
   window.location.href = "../page_food_info/index.html";
+
   localStorage.setItem(
     "foodName",
     parsedData["hits"][this.parentNode.parentNode.id]["recipe"]["label"]
   );
+
   localStorage.setItem(
     "meal",
     parsedData["hits"][this.parentNode.parentNode.id]["recipe"]["mealType"][0]
   );
+
   localStorage.setItem(
     "cuisine",
     parsedData["hits"][this.parentNode.parentNode.id]["recipe"][
       "cuisineType"
     ][0]
   );
+
   localStorage.setItem(
     "carbs",
     parsedData["hits"][this.parentNode.parentNode.id]["recipe"]["dietLabels"][0]
   );
+
   localStorage.setItem(
     "dish",
     parsedData["hits"][this.parentNode.parentNode.id]["recipe"]["dishType"][0]
   );
 
-  let ing = [];
-  
-    parsedData["hits"][this.parentNode.parentNode.id]["recipe"][
-      "ingredients"
-    ].map((e) => {
-      ing.push(e["text"]);
-    });
+  let ingredients_array = [];
+  parsedData["hits"][this.parentNode.parentNode.id]["recipe"][
+    "ingredients"
+  ].map((e) => {
+    ingredients_array.push(e["text"]);
+  });
 
-  let ingredients = JSON.stringify(removeDuplicates(ing));
+  let ingredients = JSON.stringify(removeDuplicates(ingredients_array));
   localStorage.setItem("ingredients", ingredients);
 
   // labels
@@ -145,7 +177,6 @@ function foodInfo() {
 
 let default_view = () => {
   input.setAttribute("value", localStorage.getItem("default_search"));
-  let request = new XMLHttpRequest();
 
   request.open(
     "GET",
@@ -176,6 +207,14 @@ let default_view = () => {
   request.send();
 };
 
+function removeDuplicates(arr) {
+  return Array.from(new Set(arr));
+}
+
+search.addEventListener("click", function () {
+  get_food_data();
+});
+
 input.addEventListener("keypress", function (event) {
   if (event.key === "Enter") {
     if (input.value !== "") {
@@ -186,39 +225,4 @@ input.addEventListener("keypress", function (event) {
 
 default_view();
 
-function get_food_data() {
-  search_query = input.value;
-  let request = new XMLHttpRequest();
 
-  request.open(
-    "GET",
-    "https://api.edamam.com/api/recipes/v2?type=public&q=" +
-      search_query +
-      "&app_id=858e7994&app_key=599e5094ae743172f128d90d303c2588%09"
-  );
-
-  request.onload = function () {
-    var response = request.response;
-    parsedData = JSON.parse(response);
-
-    $(".food-card").empty();
-    parsedData["hits"].map((e, i) => {
-      document
-        .querySelector(".food-card")
-        .appendChild(
-          create_card(
-            i,
-            e["recipe"]["label"],
-            e["recipe"]["image"],
-            parseInt(e["recipe"]["calories"]).toString(),
-            e["recipe"]["yield"]
-          )
-        );
-    });
-  };
-  request.send();
-}
-
-function removeDuplicates(arr) {
-  return Array.from(new Set(arr));
-}

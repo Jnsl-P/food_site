@@ -16,12 +16,10 @@ body {
 }
 
 .navigation {
-  /* position: absolute; */
   width: 100%;
 }
 
 .section1 {
-  /* height: 100vh; */
   width: 100%;
 }
 
@@ -36,7 +34,6 @@ body {
 
 .card {
   align-items: center;
-  /* height: 15rem; */
   border-radius: 15px;
   padding: 0;
   box-shadow: 5px 5px 10px #1d1d1d;
@@ -105,13 +102,15 @@ body {
   color: rgb(255, 136, 0) !important;
 }
 
+.site-title h1 {
+  font-size: clamp(1rem, 1.0774rem + 3.7936vw, 55.6225rem);
+}
+
 @media only screen and (min-width: 0px) {
   .site-title {
     width: 90vw;
   }
-  .site-title h1 {
-    font-size: 1.9rem;
-  }
+ 
 
   .site-title p {
     font-size: 10px;
@@ -126,9 +125,7 @@ body {
   .site-title {
     width: 85vw;
   }
-  .site-title h1 {
-    font-size: 1.9rem;
-  }
+ 
   .site-title p {
     font-size: 12px;
   }
@@ -142,9 +139,6 @@ body {
     width: 80vw;
   }
 
-  .site-title h1 {
-    font-size: 3.3rem;
-  }
   .site-title p {
     font-size: 1rem;
   }
@@ -160,9 +154,6 @@ body {
     max-width: 10000px;
   }
 
-  .site-title h1 {
-    font-size: 5rem;
-  }
   .site-title p {
     font-size: 1.2rem;
   }
@@ -179,10 +170,6 @@ body {
 
 @media only screen and (min-width: 2560px) {
   
-  .site-title h1 {
-    font-size: 8rem;
-  }
-
   .search_section {
     max-width: 500px;
   }
